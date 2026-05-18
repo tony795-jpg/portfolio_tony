@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Operator | Portfolio</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #f5f5f5;
+            --muted: #7a7a7a;
+            --accent: #bc0000;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: var(--bg);
+            color: var(--fg);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            padding: 4rem 2rem;
+        }
+        
+        header {
+            max-width: 1200px;
+            margin: 0 auto 6rem auto;
+        }
+        
+        h1 { 
+            font-size: 1.8rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            display: inline-block;
+            transition: letter-spacing 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s ease;
+        }
+        
+        h1:hover {
+            letter-spacing: 4px;
+            color: var(--fg);
+        }
+        
+        p.subtitle { color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .section-title {
+            max-width: 1200px;
+            margin: 4rem auto 2rem auto;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--muted);
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Fixed Geometric Grid System */
+        .portfolio-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .grid-item {
+            background: #111;
+            overflow: hidden;
+            position: relative;
+        }
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 3 / 2; 
+            object-fit: cover;   
+            display: block;
+            filter: grayscale(20%);
+            transition: filter 0.4s ease, transform 0.4s ease;
+        }
+        .grid-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+        .meta {
+            padding: 1rem 0;
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+        }
+        .meta span.client { color: var(--fg); font-weight: 600; }
+
+        /* Premium Scroll Animation Framework */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        footer {
+            max-width: 1200px;
+            margin: 8rem auto 0 auto;
+            color: var(--muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        footer a { color: var(--fg); text-decoration: none; border-bottom: 1px dashed var(--muted); transition: color 0.3s, border-color 0.3s; }
+        footer a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Duy Nguyen Archive</h1>
+        <p class="subtitle">Commercial Assets & Editorial Documentation</p>
+    </header>
+
+    <div class="section-title">01 / Commercial Precision & Logistics</div>
+    <main class="portfolio-grid">
+        <div class="grid-item">
+            <img src="images/dash-mercedes-hero.jpg" alt="Mercedes-Benz Fleet Logistics">
+            <div class="meta">
+                <span class="client">DASH Design Sprint × Veo Oy Ab</span>
+                <span>Automotive / Geometry</span>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="images/architectural-orchid.jpg" alt="Geometric Still Life">
+            <div class="meta">
+                <span class="client">Interior Geometry</span>
+                <span>Still Life / Light Study</span>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="images/editorial-profile.jpg" alt="Rim-lit Portrait">
+            <div class="meta">
+                <span class="client">Editorial Study</span>
+                <span>High-Contrast Profile</span>
+            </div>
+        </div>
+    </main>
+
+    <div class="section-title">02 / Documentary Archive & Subculture</div>
+    <section class="portfolio-grid">
+        <div class="grid-item">
+            <img src="images/cherry-blossom-layer.jpg" alt="Editorial Portrait Roihuvuori">
+            <div class="meta">
+                <span class="client">Roihuvuori Spring Study</span>
+                <span>Natural Framing / Depth</span>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="images/stage-haze-50mm.jpg" alt="Live Music Haze">
+            <div class="meta">
+                <span class="client">Live Performance</span>
+                <span>Atmosphere / 50mm Haze</span>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="images/concert-silhouette.jpg" alt="Concert Silhouette">
+            <div class="meta">
+                <span class="client">Live Performance</span>
+                <span>Geometric Isolation</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-title">03 / Featured Project Lookbook</div>
+    <section class="portfolio-grid">
+        <div class="grid-item">
+            <div style="padding: 4rem 2rem; color: var(--muted); font-size: 0.8rem; text-align: center; border: 1px dashed #222;">
+                ARCHIVE EXPANSION PENDING
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Visual Operator. Engineered via open-source infrastructure. Contact via <a href="mailto:your-email@aalto.fi">Email</a>.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { 
+            rootMargin: '0px 0px -50px 0px', // Triggers slightly before element hits full viewport visibility
+            threshold: 0.05 
+        });
+
+        // Auto-apply animation class to structural layout targets
+        document.querySelectorAll('.section-title, .grid-item').forEach((el) => {
+            el.classList.add('reveal');
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
