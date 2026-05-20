@@ -4,13 +4,13 @@ How I skipped expensive web builders, ran into a wall of code (bugs), and ended 
 
 ---
 
-## The stack explained
+## The stack explainedd
 
 Instead of paying a monthly fee to Squarespace or Wix (expensive!!), I built this layout by hand (AI-assisted, of course) and decoupled the pieces so it costs absolutely nothing to run and run *efficiently*:
 
 * **The Looks:** Written in raw HTML using the **Tailwind CSS Play CDN** link so I can slap design styles onto the page instantly without dealing with annoying local terminal setup.
 * **The Web Hosting:** Pushed to **GitHub** and automatically launched on **Vercel**. Every time I save my code, Vercel updates the live link globally.
-* **The Photos:** High-res photography files are too heavy for GitHub and free cloud limits. To put that in perspective the average size of a full-size a7RIII .jpg file is around *50-80 MB*, so it will choke out Git if I don't , especially as I am going to expand this website. Instead, they live on a physical, legacy **HP Compaq Linux server** in my room and stream to the website over an encrypted tunnel using **Tailscale Funnel**.
+* **The Photos:** High-res photography files are too heavy for GitHub and free cloud limits. To put that in perspective the average size of a full-size a7RIII .jpg file is around *50-80 MB*, so it will choke out Git if I don't, especially as I am going to expand this website. Instead, they live on a physical, legacy **HP Compaq Linux server** in my room and stream to the website over an encrypted tunnel using **Tailscale Funnel**.
 
 ---
 
@@ -31,7 +31,7 @@ I realized I have a bunch of photos lying around, a professional, battle-tested 
 Realized pushing massive 42-megapixel photos directly to a GitHub repository would completely choke it. Grabbed my spare Linux server that I picked up for free somewhere random and entered it via SSH, dropped the raw image folder onto its local storage, and configured a secure Tailscale internet mesh so the Vercel frontend could grab the images directly from my physical server.
 
 ###  Stage 3: The mess
-As the grid grew, the code got absolutely bloated with endless duplicate utility classes, which I got pretty uncomfortable with because I can't keep track of 1000 <div> classes by eye without slowing down my deployment (remember the goal is to get this going as soon as possible). I got angry and tried to lazily copy-paste the code into a visual drag-and-drop editor (Pinegrow) to skip the coding work, but the entire page broke and stripped my fonts. Turns out, offline visual apps can't read live web scripts like the Tailwind CDN. 
+As the grid grew, the code got absolutely bloated with endless duplicate utility classes, which I got pretty uncomfortable with because I can't keep track of 1000 <div> classes by eye without slowing down my deployment (remember the goal is to get this going as soon as possible). I got angry and tried to lazily copy-paste the code into a visual drag-and-drop editor (Pinegrow) to skip the coding work, but the entire page broke and make my portfolio look exactly like a PowerPoint slide show. Turns out, offline visual apps can't read live web scripts like the Tailwind CDN. 
 
 To make it more confusing, I was trying to fix it inside `github.dev` in a web browser tab, wondering why I couldn't install live visual preview extensions. Then I checked Vercel, and it gave me a massive "No Domains" alert, making me think the whole deployment was dead (spoiler: of course it wasn't; I was just looking at the paid domain store instead of my project card).
 
