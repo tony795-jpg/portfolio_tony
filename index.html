@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duy Nguyen | Photographic Archive & Visual Studies</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #070707;
+            --fg: #f5f5f5;
+            --muted: #888888;
+            --accent: #d40000;
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--fg);
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .editorial-font { font-family: 'Playfair Display', serif; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+
+        /* Fine grain noise overlay */
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            opacity: 0.025; z-index: 9999; pointer-events: none;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .grid-img-container { position: relative; overflow: hidden; background: #0d0d0d; aspect-ratio: 3 / 2; }
+        .grid-img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: grayscale(35%) contrast(1.05); }
+        .grid-item:hover .grid-img { transform: scale(1.04); filter: grayscale(0%) contrast(1); }
+
+        /* Scroll Reveal Framework */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .lightbox-overlay { opacity: 0; pointer-events: none; transition: opacity 0.4s ease-in-out; }
+        .lightbox-overlay.open { opacity: 1; pointer-events: auto; }
+    </style>
+</head>
+<body class="relative min-h-screen selection:bg-red-950 selection:text-red-200">
+
+    <div class="noise"></div>
+
+    <div class="max-w-6xl mx-auto px-6 py-12 md:py-24">
+        
+        <header class="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-900 pb-8">
+            <div>
+                <div class="text-xs uppercase tracking-[0.4em] text-red-700 font-semibold mb-2">Visual Exhibition & Archive</div>
+                <h1 class="text-3xl md:text-5xl font-light tracking-tight transition-all duration-300 hover:tracking-wide">
+                    DUY NGUYEN <span class="editorial-font italic text-zinc-400 font-normal">Archive</span>
+                </h1>
+                <p class="text-xs uppercase tracking-[0.25em] text-zinc-500 mt-3">Commercial Assets & Editorial Documentation</p>
+            </div>
+            <div class="text-left md:text-right text-xs text-zinc-500 max-w-xs space-y-1">
+                <div>Based in Helsinki, FI</div>
+                <div>Portfolio Edition V2.06</div>
+                <div>Available for Commission</div>
+            </div>
+        </header>
+
+        <div class="flex flex-wrap gap-3 mb-12 text-xs uppercase tracking-[0.15em] border-b border-zinc-900 pb-6">
+            <span class="text-zinc-500 mr-2 flex items-center">Filter Archive:</span>
+            <button onclick="filterGallery('all', event)" class="filter-btn px-3 py-1 bg-zinc-900 border border-zinc-800 text-white transition duration-300">All Studies</button>
+            <button onclick="filterGallery('commercial', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Commercial / Logic</button>
+            <button onclick="filterGallery('editorial', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Editorial / Portrait</button>
+            <button onclick="filterGallery('subculture', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Subculture / Live</button>
+        </div>
+
+        <main id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="grid-item group cursor-pointer" data-category="commercial" onclick="openLightbox('https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=90&w=1200', 'Mercedes-Benz Fleet Logistics', 'DASH Design Sprint × Veho Oy Ab', 'Automotive / Geometry')">
+                <div class="grid-img-container">
+                    <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=800" alt="Mercedes-Benz Fleet Logistics" class="grid-img w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
+                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">DASH Design Sprint × Veho Oy Ab</span>
+                    <span>Automotive</span>
+                </div>
+            </div>
+
+            <div class="grid-item group cursor-pointer" data-category="commercial" onclick="openLightbox('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=90&w=1200', 'Geometric Still Life', 'Interior Geometry', 'Still Life / Light Study')">
+                <div class="grid-img-container">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800" alt="Geometric Still Life" class="grid-img w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
+                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">Interior Geometry</span>
+                    <span>Still Life</span>
+                </div>
+            </div>
+
+            <div class="grid-item group cursor-pointer" data-category="editorial" onclick="openLightbox('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=90&w=1200', 'Rim-lit Portrait', 'Editorial Study', 'High-Contrast Profile')">
+                <div class="grid-img-container">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" alt="Rim-lit Portrait" class="grid-img w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
+                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">Editorial Study</span>
+                    <span>Portrait</span>
+                </div>
+            </div>
+
+            <div class="grid-item group cursor-pointer" data-category="editorial" onclick="openLightbox('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=90&w=1200', 'Editorial Portrait Roihuvuori', 'Roihuvuori Spring Study', 'Natural Framing / Depth')">
+                <div class="grid-img-container">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800" alt="Editorial Portrait Roihuvuori" class="grid-img w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
+                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">Roihuvuori Spring Study</span>
+                    <span>Framing</span>
+                </div>
+            </div>
+
+            <div class="grid-item group cursor-pointer" data-category="subculture" onclick="openLightbox('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=90&w=1200', 'Live Music Haze', 'Live Performance', 'Atmosphere / 50mm Haze')">
+                <div class="grid-img-container">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800" alt="Live Music Haze" class="grid-img w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
+                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">Live Performance</span>
+                    <span>Atmosphere</span>
+                </div>
+            </div>
+
+            <div class="grid-item group cursor-pointer" data-category="subculture" onclick="openLightbox('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=90&w=1200', 'Concert Silhouette', 'Live Performance Studio', 'Geometric Isolation')">
+                <div class="grid-img-container">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800" alt="Concert Silhouette" class="grid-img w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
+                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">Live Performance</span>
+                    <span>Isolation</span>
+                </div>
+            </div>
+        </main>
+
+        <div id="lightbox" class="lightbox-overlay fixed inset-0 z-50 bg-[#060606f2] backdrop-blur-md flex flex-col justify-between p-6">
+            <div class="flex justify-between items-center max-w-7xl w-full mx-auto">
+                <div class="text-[10px] tracking-[0.25em] text-zinc-500 uppercase">Exhibition Space — View Mode</div>
+                <button onclick="closeLightbox()" class="text-zinc-500 hover:text-white text-xs uppercase tracking-wider p-2 transition duration-300">
+                    <i class="fa-solid fa-xmark mr-1"></i> Close [ESC]
+                </button>
+            </div>
+
+            <div class="max-w-4xl mx-auto flex items-center justify-center flex-grow py-4 px-2">
+                <img id="lightbox-img" src="" alt="" class="max-h-[70vh] max-w-full object-contain border border-zinc-900 shadow-2xl">
+            </div>
+
+            <div class="max-w-7xl w-full mx-auto border-t border-zinc-900 pt-6 pb-4 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                <div>
+                    <h2 id="lightbox-title" class="text-lg md:text-xl font-light text-zinc-200"></h2>
+                    <p id="lightbox-client" class="text-xs tracking-wider text-red-500 mt-1 uppercase"></p>
+                </div>
+                <div class="text-right">
+                    <span id="lightbox-tag" class="text-[10px] tracking-[0.2em] border border-zinc-800 bg-zinc-950 px-3 py-1 text-zinc-400 uppercase"></span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-24 pt-12 border-t border-zinc-900 text-xs text-zinc-600 tracking-wider flex flex-col md:flex-row justify-between gap-6">
+            <div class="space-y-1">
+                <p>© 2026 DUY NGUYEN. ENGINEERED VIA OPEN-SOURCE ARCHITECTURE.</p>
+                <p class="text-[10px] text-zinc-700">Built on Minimalist Geometric Design System</p>
+            </div>
+            <div>
+                CONTACT VIA 
+                <a href="mailto:duyng8@gmail.com" class="text-zinc-400 hover:text-red-500 underline decoration-dashed underline-offset-4 transition duration-300">DUYNG8@GMAIL.COM</a> 
+                OR 
+                <a href="#" class="text-zinc-400 hover:text-red-500 underline decoration-dashed underline-offset-4 transition duration-300">SECURE INBOX</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxClient = document.getElementById('lightbox-client');
+        const lightboxTag = document.getElementById('lightbox-tag');
+
+        function openLightbox(imgSrc, title, client, category) {
+            lightboxImg.src = imgSrc;
+            lightboxTitle.innerText = title;
+            lightboxClient.innerText = client;
+            lightboxTag.innerText = category;
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        window.addEventListener('keydown', (e) => { e.key === 'Escape' && closeLightbox(); });
+
+        // Fixed Category Filter Engine
+        function filterGallery(category, clickEvent) {
+            const items = document.querySelectorAll('.grid-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.className = "filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300";
+            });
+
+            // Target the accurate trigger element safely
+            const activeBtn = clickEvent.currentTarget || clickEvent.target;
+            activeBtn.className = "filter-btn px-3 py-1 bg-zinc-900 border border-zinc-800 text-white transition duration-300";
+
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                if (category === 'all' || itemCat === category) {
+                    item.style.display = 'block';
+                    setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 10);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.97)';
+                    setTimeout(() => { item.style.display = 'none'; }, 300);
+                }
+            });
+        }
+
+        // Reveal Observer Engine
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) { entry.target.classList.add('active'); }
+            });
+        }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
+
+        document.querySelectorAll('.grid-item, header').forEach((el) => {
+            el.classList.add('reveal');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
