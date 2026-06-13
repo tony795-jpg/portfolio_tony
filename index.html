@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duy Nguyen | Photographic Archive & Visual Studies</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
             --muted: #888888;
             --accent: #d40000;
         }
-        
+
         body {
             background-color: var(--bg);
             color: var(--fg);
@@ -57,7 +57,7 @@
     <div class="noise"></div>
 
     <div class="max-w-6xl mx-auto px-6 py-12 md:py-24">
-        
+
         <header class="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-900 pb-8">
             <div>
                 <div class="text-xs uppercase tracking-[0.4em] text-red-700 font-semibold mb-2">Visual Exhibition & Archive</div>
@@ -76,73 +76,14 @@
         <div class="flex flex-wrap gap-3 mb-12 text-xs uppercase tracking-[0.15em] border-b border-zinc-900 pb-6">
             <span class="text-zinc-500 mr-2 flex items-center">Filter Archive:</span>
             <button onclick="filterGallery('all', event)" class="filter-btn px-3 py-1 bg-zinc-900 border border-zinc-800 text-white transition duration-300">All Studies</button>
-            <button onclick="filterGallery('commercial', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Commercial / Logic</button>
-            <button onclick="filterGallery('editorial', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Editorial / Portrait</button>
-            <button onclick="filterGallery('subculture', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Subculture / Live</button>
+            <button onclick="filterGallery('portrait', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Portrait</button>
+            <button onclick="filterGallery('urban', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Urban</button>
+            <button onclick="filterGallery('landscape', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Landscape</button>
+            <button onclick="filterGallery('still-life', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Still Life</button>
         </div>
 
-        <main id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div class="grid-item group cursor-pointer" data-category="commercial" onclick="openLightbox('https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=90&w=1200', 'Mercedes-Benz Fleet Logistics', 'DASH Design Sprint × Veho Oy Ab', 'Automotive / Geometry')">
-                <div class="grid-img-container">
-                    <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=800" alt="Mercedes-Benz Fleet Logistics" class="grid-img w-full h-full object-cover" loading="lazy">
-                </div>
-                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
-                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">DASH Design Sprint × Veho Oy Ab</span>
-                    <span>Automotive</span>
-                </div>
-            </div>
-
-            <div class="grid-item group cursor-pointer" data-category="commercial" onclick="openLightbox('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=90&w=1200', 'Geometric Still Life', 'Interior Geometry', 'Still Life / Light Study')">
-                <div class="grid-img-container">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800" alt="Geometric Still Life" class="grid-img w-full h-full object-cover" loading="lazy">
-                </div>
-                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
-                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">Interior Geometry</span>
-                    <span>Still Life</span>
-                </div>
-            </div>
-
-            <div class="grid-item group cursor-pointer" data-category="editorial" onclick="openLightbox('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=90&w=1200', 'Rim-lit Portrait', 'Editorial Study', 'High-Contrast Profile')">
-                <div class="grid-img-container">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" alt="Rim-lit Portrait" class="grid-img w-full h-full object-cover" loading="lazy">
-                </div>
-                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
-                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">Editorial Study</span>
-                    <span>Portrait</span>
-                </div>
-            </div>
-
-            <div class="grid-item group cursor-pointer" data-category="editorial" onclick="openLightbox('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=90&w=1200', 'Editorial Portrait Roihuvuori', 'Roihuvuori Spring Study', 'Natural Framing / Depth')">
-                <div class="grid-img-container">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800" alt="Editorial Portrait Roihuvuori" class="grid-img w-full h-full object-cover" loading="lazy">
-                </div>
-                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
-                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">Roihuvuori Spring Study</span>
-                    <span>Framing</span>
-                </div>
-            </div>
-
-            <div class="grid-item group cursor-pointer" data-category="subculture" onclick="openLightbox('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=90&w=1200', 'Live Music Haze', 'Live Performance', 'Atmosphere / 50mm Haze')">
-                <div class="grid-img-container">
-                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800" alt="Live Music Haze" class="grid-img w-full h-full object-cover" loading="lazy">
-                </div>
-                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
-                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">Live Performance</span>
-                    <span>Atmosphere</span>
-                </div>
-            </div>
-
-            <div class="grid-item group cursor-pointer" data-category="subculture" onclick="openLightbox('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=90&w=1200', 'Concert Silhouette', 'Live Performance Studio', 'Geometric Isolation')">
-                <div class="grid-img-container">
-                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800" alt="Concert Silhouette" class="grid-img w-full h-full object-cover" loading="lazy">
-                </div>
-                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
-                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">Live Performance</span>
-                    <span>Isolation</span>
-                </div>
-            </div>
-        </main>
+        <!-- Grid is rendered from the `photos` array in the script below -->
+        <main id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></main>
 
         <div id="lightbox" class="lightbox-overlay fixed inset-0 z-50 bg-[#060606f2] backdrop-blur-md flex flex-col justify-between p-6">
             <div class="flex justify-between items-center max-w-7xl w-full mx-auto">
@@ -173,8 +114,8 @@
                 <p class="text-[10px] text-zinc-700">Built on Minimalist Geometric Design System</p>
             </div>
             <div>
-                CONTACT VIA 
-                <a href="mailto:duyng8@gmail.com" class="text-zinc-400 hover:text-red-500 underline decoration-dashed underline-offset-4 transition duration-300">DUYNG8@GMAIL.COM</a> 
+                CONTACT VIA
+                <a href="mailto:duyng8@gmail.com" class="text-zinc-400 hover:text-red-500 underline decoration-dashed underline-offset-4 transition duration-300">DUYNG8@GMAIL.COM</a>
             </div>
         </footer>
     </div>
@@ -186,11 +127,52 @@
         const lightboxClient = document.getElementById('lightbox-client');
         const lightboxTag = document.getElementById('lightbox-tag');
 
-        function openLightbox(imgSrc, title, client, category) {
-            lightboxImg.src = imgSrc;
-            lightboxTitle.innerText = title;
-            lightboxClient.innerText = client;
-            lightboxTag.innerText = category;
+        /* ============================================================
+           ARCHIVE DATA — to add a photo, add ONE object to this list.
+             id       : image id (Unsplash for now; swap for your own host later)
+             category : portrait | urban | landscape | still-life
+             title    : shown in lightbox + used as the image alt text
+             client   : line under the photo / project credit
+             tag      : descriptive line shown in the lightbox
+             label    : short word shown on the grid card (right side)
+           ============================================================ */
+        const img   = (id, w, q) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=${q}&w=${w}`;
+        const thumb = (id) => img(id, 800, 80);    // lightweight grid preview
+        const full  = (id) => img(id, 1200, 90);   // larger lightbox view
+
+        const photos = [
+            { id: '1618843479313-40f8afb4b4d8', category: 'urban',      title: 'Mercedes-Benz Fleet Logistics', client: 'DASH Design Sprint × Veho Oy Ab', tag: 'Automotive / Geometry',  label: 'Automotive' },
+            { id: '1600585154340-be6161a56a0c', category: 'still-life', title: 'Geometric Still Life',          client: 'Interior Geometry',              tag: 'Still Life / Light Study', label: 'Still Life' },
+            { id: '1507003211169-0a1dd7228f2d', category: 'portrait',   title: 'Rim-lit Portrait',              client: 'Editorial Study',                tag: 'High-Contrast Profile',    label: 'Portrait' },
+            { id: '1494790108377-be9c29b29330', category: 'portrait',   title: 'Editorial Portrait Roihuvuori', client: 'Roihuvuori Spring Study',        tag: 'Natural Framing / Depth',  label: 'Framing' },
+            { id: '1516450360452-9312f5e86fc7', category: 'urban',      title: 'Live Music Haze',               client: 'Live Performance',               tag: 'Atmosphere / 50mm Haze',   label: 'Atmosphere' },
+            { id: '1506905925346-21bda4d32df4', category: 'landscape',  title: 'Nordic Range',                  client: 'Field Study',                    tag: 'Terrain / Natural Light',  label: 'Terrain' },
+        ];
+
+        // The card template — written ONCE. Every photo is rendered through this.
+        function cardHTML(p, i) {
+            return `
+            <div class="grid-item group cursor-pointer" data-category="${p.category}" onclick="openLightbox(${i})">
+                <div class="grid-img-container">
+                    <img src="${thumb(p.id)}" alt="${p.title}" class="grid-img w-full h-full object-cover" loading="lazy">
+                </div>
+                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
+                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">${p.client}</span>
+                    <span>${p.label}</span>
+                </div>
+            </div>`;
+        }
+
+        // Render the whole grid from the data above.
+        document.getElementById('archive-grid').innerHTML = photos.map(cardHTML).join('');
+
+        function openLightbox(i) {
+            const p = photos[i];
+            lightboxImg.src = full(p.id);
+            lightboxImg.alt = p.title;
+            lightboxTitle.innerText = p.title;
+            lightboxClient.innerText = p.client;
+            lightboxTag.innerText = p.tag;
             lightbox.classList.add('open');
             document.body.style.overflow = 'hidden';
         }
