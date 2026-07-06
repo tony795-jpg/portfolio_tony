@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duy Nguyen | Photographic Archive & Visual Studies</title>
+    <title>Tony Nguyen | Photographic Archive & Visual Studies</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -41,8 +41,8 @@
             background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        .grid-img-container { position: relative; overflow: hidden; background: #0d0d0d; aspect-ratio: 3 / 2; }
-        .grid-img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: grayscale(35%) contrast(1.05); }
+        .grid-img-container { position: relative; overflow: hidden; background: #0d0d0d; }
+        .grid-img { display: block; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: grayscale(35%) contrast(1.05); }
         .grid-item:hover .grid-img { transform: scale(1.04); filter: grayscale(0%) contrast(1); }
 
         /* Scroll Reveal Framework */
@@ -56,19 +56,19 @@
 
     <div class="noise"></div>
 
-    <div class="max-w-6xl mx-auto px-6 py-12 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-24">
 
         <header class="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-900 pb-8">
             <div>
                 <div class="text-xs uppercase tracking-[0.4em] text-red-700 font-semibold mb-2">Visual Exhibition & Archive</div>
                 <h1 class="text-3xl md:text-5xl font-light tracking-tight transition-all duration-300 hover:tracking-wide">
-                    DUY NGUYEN <span class="editorial-font italic text-zinc-400 font-normal">Archive</span>
+                    TONY NGUYEN <span class="editorial-font italic text-zinc-400 font-normal">Archive</span>
                 </h1>
                 <p class="text-xs uppercase tracking-[0.25em] text-zinc-500 mt-3">Commercial Assets & Editorial Documentation</p>
             </div>
             <div class="text-left md:text-right text-xs text-zinc-500 max-w-xs space-y-1">
                 <div>Based in Helsinki, FI</div>
-                <div>Portfolio Edition 0.1</div>
+                <div>Portfolio Edition 1.0</div>
                 <div>Available for Commission</div>
             </div>
         </header>
@@ -77,41 +77,31 @@
             <span class="text-zinc-500 mr-2 flex items-center">Filter Archive:</span>
             <button onclick="filterGallery('all', event)" class="filter-btn px-3 py-1 bg-zinc-900 border border-zinc-800 text-white transition duration-300">All Studies</button>
             <button onclick="filterGallery('portrait', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Portrait</button>
-            <button onclick="filterGallery('urban', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Urban</button>
-            <button onclick="filterGallery('landscape', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Landscape</button>
+            <button onclick="filterGallery('events', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Events</button>
             <button onclick="filterGallery('still-life', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Still Life</button>
+            <button onclick="filterGallery('nature', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Nature</button>
+            <button onclick="filterGallery('automotive', event)" class="filter-btn px-3 py-1 border border-zinc-900 text-zinc-500 hover:text-white hover:border-zinc-800 transition duration-300">Automotive</button>
         </div>
 
-        <!-- Grid is rendered from the `photos` array in the script below -->
-        <main id="archive-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></main>
+        <!-- Masonry grid (CSS columns) rendered from the `photos` array in the script below -->
+        <main id="archive-grid" class="columns-1 md:columns-2 lg:columns-3 gap-3"></main>
 
-        <div id="lightbox" class="lightbox-overlay fixed inset-0 z-50 bg-[#060606f2] backdrop-blur-md flex flex-col justify-between p-6">
-            <div class="flex justify-between items-center max-w-7xl w-full mx-auto">
-                <div class="text-[10px] tracking-[0.25em] text-zinc-500 uppercase">Exhibition Space — View Mode</div>
-                <button onclick="closeLightbox()" class="text-zinc-500 hover:text-white text-xs uppercase tracking-wider p-2 transition duration-300">
-                    <i class="fa-solid fa-xmark mr-1"></i> Close [ESC]
-                </button>
-            </div>
+        <div id="lightbox" class="lightbox-overlay fixed inset-0 z-[10000] bg-[#060606f2] backdrop-blur-md flex items-center justify-center p-3">
+            <div class="absolute top-4 left-5 text-[8px] tracking-[0.2em] text-zinc-600 uppercase pointer-events-none">Exhibition Space — View Mode</div>
+            <button onclick="closeLightbox()" class="absolute top-3 right-4 z-10 text-zinc-400 hover:text-white text-xs uppercase tracking-wider p-2 transition duration-300">
+                <i class="fa-solid fa-xmark mr-1"></i> Close [ESC]
+            </button>
 
-            <div class="max-w-4xl mx-auto flex items-center justify-center flex-grow py-4 px-2">
-                <img id="lightbox-img" src="" alt="" class="max-h-[70vh] max-w-full object-contain border border-zinc-900 shadow-2xl">
-            </div>
+            <img id="lightbox-img" src="" alt="" class="max-h-[85vh] max-w-[85vw] object-contain border border-zinc-900 shadow-2xl">
 
-            <div class="max-w-7xl w-full mx-auto border-t border-zinc-900 pt-6 pb-4 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-                <div>
-                    <h2 id="lightbox-title" class="text-lg md:text-xl font-light text-zinc-200"></h2>
-                    <p id="lightbox-client" class="text-xs tracking-wider text-red-500 mt-1 uppercase"></p>
-                </div>
-                <div class="text-right">
-                    <span id="lightbox-tag" class="text-[10px] tracking-[0.2em] border border-zinc-800 bg-zinc-950 px-3 py-1 text-zinc-400 uppercase"></span>
-                </div>
-            </div>
+            <h2 id="lightbox-title" class="hidden"></h2>
+            <p id="lightbox-client" class="absolute bottom-4 left-5 text-xs tracking-wider text-red-500 uppercase pointer-events-none"></p>
+            <span id="lightbox-tag" class="absolute bottom-4 right-4 text-[8px] tracking-[0.15em] border border-zinc-800 bg-zinc-950/70 px-1.5 py-0.5 text-zinc-500 uppercase pointer-events-none"></span>
         </div>
 
         <footer class="mt-24 pt-12 border-t border-zinc-900 text-xs text-zinc-600 tracking-wider flex flex-col md:flex-row justify-between gap-6">
             <div class="space-y-1">
-                <p>© 2026 DUY NGUYEN. ENGINEERED VIA OPEN-SOURCE ARCHITECTURE.</p>
-                <p class="text-[10px] text-zinc-700">Built on Minimalist Geometric Design System</p>
+                <p>© 2026 TONY NGUYEN.</p>
             </div>
             <div>
                 CONTACT VIA
@@ -129,36 +119,62 @@
 
         /* ============================================================
            ARCHIVE DATA — to add a photo, add ONE object to this list.
-             id       : image id (Unsplash for now; swap for your own host later)
-             category : portrait | urban | landscape | still-life
-             title    : shown in lightbox + used as the image alt text
-             client   : line under the photo / project credit
+             id       : image id — becomes <id>-800.jpg / <id>-1600.jpg on the server
+             category : portrait | events | automotive | still-life | nature
+             title    : AUTO "<label> NN" series index; add title:'…' to pin a custom one
+             client   : OPTIONAL — real commission credit; shows in lightbox only if present
              tag      : descriptive line shown in the lightbox
-             label    : short word shown on the grid card (right side)
+             label    : series name (Portrait/Events/…); drives the auto title
            ============================================================ */
-        const img   = (id, w, q) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&q=${q}&w=${w}`;
-        const thumb = (id) => img(id, 800, 80);    // lightweight grid preview
-        const full  = (id) => img(id, 1200, 90);   // larger lightbox view
+        // ── IMAGE HOST ──────────────────────────────────────────────────
+        // Photos are served from the home server (HP Compaq) over Tailscale Funnel.
+        // Each photo needs TWO files on the server, named after its `id`:
+        //     <id>-800.jpg    → grid thumbnail
+        //     <id>-2560.jpg   → lightbox / full view (retina-crisp)
+        // e.g. id 'portrait-01' → portrait-01-800.jpg + portrait-01-2560.jpg
+        const BASE  = 'https://tony-hp-compaq-8200-elite-mt-pc.taild6c232.ts.net/photos';
+        const thumb = (id) => `${BASE}/${id}-800.jpg`;    // lightweight grid preview
+        const full  = (id) => `${BASE}/${id}-2560.jpg`;   // large, retina-crisp lightbox view
 
+        // Launch set — 17 photos. Masonry grid crops nothing. Titles are AUTO-GENERATED as a
+        // per-category series index ("Portrait 01", "Nature 02", …) by the numbering pass below.
+        // To pin a custom title on a standout shot, add `title: '…'` to that entry (see 'Lily').
+        // `client` is OPTIONAL: add it only for real commissions; it shows in the lightbox when present.
         const photos = [
-            { id: '1618843479313-40f8afb4b4d8', category: 'urban',      title: 'Mercedes-Benz Fleet Logistics', client: 'DASH Design Sprint × Veho Oy Ab', tag: 'Automotive / Geometry',  label: 'Automotive' },
-            { id: '1600585154340-be6161a56a0c', category: 'still-life', title: 'Geometric Still Life',          client: 'Interior Geometry',              tag: 'Still Life / Light Study', label: 'Still Life' },
-            { id: '1507003211169-0a1dd7228f2d', category: 'portrait',   title: 'Rim-lit Portrait',              client: 'Editorial Study',                tag: 'High-Contrast Profile',    label: 'Portrait' },
-            { id: '1494790108377-be9c29b29330', category: 'portrait',   title: 'Editorial Portrait Roihuvuori', client: 'Roihuvuori Spring Study',        tag: 'Natural Framing / Depth',  label: 'Framing' },
-            { id: '1516450360452-9312f5e86fc7', category: 'urban',      title: 'Live Music Haze',               client: 'Live Performance',               tag: 'Atmosphere / 50mm Haze',   label: 'Atmosphere' },
-            { id: '1506905925346-21bda4d32df4', category: 'landscape',  title: 'Nordic Range',                  client: 'Field Study',                    tag: 'Terrain / Natural Light',  label: 'Terrain' },
+            { id: 'events-05',    category: 'events',     tag: 'Live · 2023',                  label: 'Events'     },
+            { id: 'portrait-01',  category: 'portrait',   tag: 'Áo Dài Portrait',              label: 'Portrait'   },
+            { id: 'portrait-03',  category: 'portrait',   tag: 'Exterior Portrait', label: 'Portrait'   },
+            { id: 'stilllife-01', category: 'still-life', tag: 'Product / Commercial',         label: 'Still Life' },
+            { id: 'portrait-04',  category: 'portrait',   tag: 'Gothic Portrait',      label: 'Portrait'   },
+            { id: 'events-01',    category: 'events',     tag: 'Keynote / Event',             label: 'Events',     client: 'DASH Sprint 2026' },
+            { id: 'stilllife-02', category: 'still-life', tag: 'Still Life ',      label: 'Still Life' },
+            { id: 'portrait-02',  category: 'portrait',   tag: 'Gothic Portrait',              label: 'Portrait'   },
+            { id: 'portrait-07',  category: 'portrait',   tag: 'Áo Dài Portrait',           label: 'Portrait'   },
+            { id: 'automotive-02', category: 'automotive', tag: 'Automotive',           label: 'Automotive', client: 'Veho Oy Ab · DASH Sprint 2026' },
+            { id: 'nature-01',    category: 'nature',     tag: 'Vietnamese River',           label: 'Nature'     },
+            { id: 'portrait-08',  category: 'portrait',   tag: 'Áo Dài Portrait',          label: 'Portrait'   },
+            { id: 'portrait-09',  category: 'portrait',   tag: 'Áo Dài Portrait',           label: 'Portrait'   },
+            { id: 'portrait-10',  category: 'portrait',   tag: 'Exterior Portrait',     label: 'Portrait'   },
+            { id: 'automotive-01', category: 'automotive', tag: 'Automotive',           label: 'Automotive', client: 'Veho Oy Ab · DASH Sprint 2026' },
+            { id: 'nature-02',    category: 'nature',     tag: 'Green Snake',        label: 'Nature'     },
+            { id: 'events-02',    category: 'events',     tag: 'Crowd / Event',               label: 'Events',     client: 'DASH Sprint 2026' },
         ];
+
+        // Auto-number photos within each category → "Portrait 01", "Nature 02", …
+        // A custom `title` on an entry (e.g. 'Lily') is kept and doesn't consume a number.
+        const _seriesCount = {};
+        photos.forEach(p => {
+            if (p.title) return;
+            _seriesCount[p.label] = (_seriesCount[p.label] || 0) + 1;
+            p.title = `${p.label} ${String(_seriesCount[p.label]).padStart(2, '0')}`;
+        });
 
         // The card template — written ONCE. Every photo is rendered through this.
         function cardHTML(p, i) {
             return `
-            <div class="grid-item group cursor-pointer" data-category="${p.category}" onclick="openLightbox(${i})">
+            <div class="grid-item group cursor-pointer break-inside-avoid mb-3" data-category="${p.category}" onclick="openLightbox(${i})">
                 <div class="grid-img-container">
-                    <img src="${thumb(p.id)}" alt="${p.title}" class="grid-img w-full h-full object-cover" loading="lazy">
-                </div>
-                <div class="meta py-4 text-[11px] tracking-widest text-zinc-500 uppercase flex justify-between border-t border-zinc-900 mt-1">
-                    <span class="text-zinc-300 group-hover:text-red-500 transition duration-300 font-medium">${p.client}</span>
-                    <span>${p.label}</span>
+                    <img src="${thumb(p.id)}" alt="${p.title}" class="grid-img w-full h-auto" loading="lazy">
                 </div>
             </div>`;
         }
@@ -170,8 +186,10 @@
             const p = photos[i];
             lightboxImg.src = full(p.id);
             lightboxImg.alt = p.title;
-            lightboxTitle.innerText = p.title;
-            lightboxClient.innerText = p.client;
+            lightboxTitle.innerText = '';
+            lightboxTitle.style.display = 'none';
+            lightboxClient.innerText = p.client || '';
+            lightboxClient.style.display = p.client ? '' : 'none';
             lightboxTag.innerText = p.tag;
             lightbox.classList.add('open');
             document.body.style.overflow = 'hidden';
