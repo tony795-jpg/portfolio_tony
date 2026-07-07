@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tony Nguyen | Photographic Archive & Visual Studies</title>
 
+    <meta name="description" content="Photography portfolio of Tony Nguyen. Portrait, events, automotive, still life and nature work. Based in Helsinki, available for commission.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Tony Nguyen Archive">
+    <meta property="og:title" content="Tony Nguyen | Photographic Archive & Visual Studies">
+    <meta property="og:description" content="Photography portfolio of Tony Nguyen. Portrait, events, automotive, still life and nature work. Based in Helsinki, available for commission.">
+    <meta property="og:url" content="https://tonynguyen795-portfolio.netlify.app/">
+    <meta property="og:image" content="https://tony-hp-compaq-8200-elite-mt-pc.taild6c232.ts.net/photos/events-05-1600.jpg">
+    <meta property="og:image:width" content="1600">
+    <meta property="og:image:height" content="1067">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tony Nguyen | Photographic Archive & Visual Studies">
+    <meta name="twitter:image" content="https://tony-hp-compaq-8200-elite-mt-pc.taild6c232.ts.net/photos/events-05-1600.jpg">
+
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -90,6 +103,13 @@
             <div class="absolute top-4 left-5 text-[8px] tracking-[0.2em] text-zinc-600 uppercase pointer-events-none">Exhibition Space — View Mode</div>
             <button onclick="closeLightbox()" class="absolute top-3 right-4 z-10 text-zinc-400 hover:text-white text-xs uppercase tracking-wider p-2 transition duration-300">
                 <i class="fa-solid fa-xmark mr-1"></i> Close [ESC]
+            </button>
+
+            <button onclick="stepLightbox(-1)" aria-label="Previous photo" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 text-zinc-500 hover:text-white text-xl p-3 transition duration-300">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button onclick="stepLightbox(1)" aria-label="Next photo" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 text-zinc-500 hover:text-white text-xl p-3 transition duration-300">
+                <i class="fa-solid fa-chevron-right"></i>
             </button>
 
             <img id="lightbox-img" src="" alt="" class="max-h-[85vh] max-w-[85vw] object-contain border border-zinc-900 shadow-2xl">
@@ -182,8 +202,20 @@
         // Render the whole grid from the data above.
         document.getElementById('archive-grid').innerHTML = photos.map(cardHTML).join('');
 
+        // Lightbox navigation state: which photo is open, and which filter is active
+        // (prev/next steps only through the photos visible under the current filter).
+        let currentIndex = -1;
+        let activeCategory = 'all';
+
+        function visibleIndices() {
+            return photos
+                .map((p, i) => (activeCategory === 'all' || p.category === activeCategory) ? i : -1)
+                .filter(i => i !== -1);
+        }
+
         function openLightbox(i) {
             const p = photos[i];
+            currentIndex = i;
             lightboxImg.src = full(p.id);
             lightboxImg.alt = p.title;
             lightboxTitle.innerText = '';
@@ -193,6 +225,22 @@
             lightboxTag.innerText = p.tag;
             lightbox.classList.add('open');
             document.body.style.overflow = 'hidden';
+
+            // Preload neighbours so stepping feels instant
+            const vis = visibleIndices();
+            const pos = vis.indexOf(i);
+            if (pos !== -1 && vis.length > 1) {
+                new Image().src = full(photos[vis[(pos + 1) % vis.length]].id);
+                new Image().src = full(photos[vis[(pos - 1 + vis.length) % vis.length]].id);
+            }
+        }
+
+        function stepLightbox(dir) {
+            const vis = visibleIndices();
+            if (!vis.length) return;
+            const pos = vis.indexOf(currentIndex);
+            const next = pos === -1 ? vis[0] : vis[(pos + dir + vis.length) % vis.length];
+            openLightbox(next);
         }
 
         function closeLightbox() {
@@ -200,10 +248,26 @@
             document.body.style.overflow = '';
         }
 
-        window.addEventListener('keydown', (e) => { e.key === 'Escape' && closeLightbox(); });
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') { closeLightbox(); return; }
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'ArrowRight') stepLightbox(1);
+            if (e.key === 'ArrowLeft') stepLightbox(-1);
+        });
+
+        // Swipe left/right inside the lightbox (touch devices)
+        let touchStartX = null;
+        lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+        lightbox.addEventListener('touchend', (e) => {
+            if (touchStartX === null) return;
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            touchStartX = null;
+            if (Math.abs(dx) > 50) stepLightbox(dx < 0 ? 1 : -1);
+        }, { passive: true });
 
         // Fixed Category Filter Engine
         function filterGallery(category, clickEvent) {
+            activeCategory = category;
             const items = document.querySelectorAll('.grid-item');
             const buttons = document.querySelectorAll('.filter-btn');
 
