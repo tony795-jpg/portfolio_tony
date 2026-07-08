@@ -197,7 +197,10 @@
             return `
             <div class="grid-item group cursor-pointer break-inside-avoid mb-3" data-category="${p.category}" onclick="openLightbox(${i})">
                 <div class="grid-img-container">
-                    <img src="${thumb(p.id)}" alt="${p.title}" class="grid-img w-full h-auto" loading="lazy">
+                    <img src="${thumb(p.id)}"
+                         srcset="${thumb(p.id)} 800w, ${BASE}/${p.id}-1600.jpg 1600w, ${full(p.id)} 2560w"
+                         sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+                         alt="${p.title}" class="grid-img w-full h-auto" loading="lazy">
                 </div>
             </div>`;
         }

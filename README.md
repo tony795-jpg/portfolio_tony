@@ -119,6 +119,29 @@ Which handed me the actual lesson of these two days: my work splits into stuff I
 
 ---
 
+## Day 6: hardening, a fake outage, and an identity crisis about fonts
+
+v1.0 was live, so naturally I spent a whole day changing everything about it anyway.
+
+### The useful stuff
+
+* **Arrow-key / swipe navigation in the full-screen view.** Before this, you had to close a photo and click the next one like a caveman. Now arrows, on-screen chevrons and swiping all work, it only cycles within the filter you picked, and it quietly preloads the neighbors so stepping feels instant. There's also a little "3 / 17" counter now so you know where you are.
+* **Link previews.** Sharing the site used to unfurl as a blank grey nothing in WhatsApp. Added the Open Graph tags so it now shows the concert shot and my name like a real website.
+* **The funnel now survives reboots.** Wrote a tiny systemd service on the Linux box that re-runs the Tailscale Funnel on every boot. Before this, one power blip would have silently killed every image on the live site until I noticed.
+* **Sharp previews on phones.** The grid was serving one 800px thumbnail to everybody, which looks like soup on a modern phone screen. Now the page offers three sizes and every device picks the smallest one that still looks sharp. The medium files I thought were useless leftovers turned out to be exactly what was needed. Nothing gets slower; phones just stop getting the blurry one.
+
+### The fake outage
+
+Mid-session, every image URL suddenly timed out and I thought the server died. Server was fine, funnel was fine, uptime 41 days. The actual cause: Tailscale was switched off on my laptop, which breaks the special DNS those URLs use, ONLY on my machine. The site was up for the whole world the entire time. Lesson: when the images "go down", check your own Tailscale before blaming the server.
+
+### The identity crisis
+
+Asked the hard question out loud: is my site dressing itself up like a six-figure studio when the evidence is one commercial client? Answer: kind of, yeah. The design (matte black, no captions) earns itself, but the WORDS were cosplaying as a museum. So: "Commercial Assets & Editorial Documentation" became a plain list of what I actually shoot, the fake museum label in the viewer became the photo counter, and the copy generally stopped writing checks the archive can't cash. Confidence in the design, modesty in the words, proof in the client credits.
+
+Then the fonts. My name was set in the same font every tech dashboard on earth uses, which finally started bothering me. Test-drove four typefaces like rental cars (too corporate, too faint, too thick and too small) before landing on Bricolage Grotesque for the name with a Cormorant italic "Archive" next to it. Also swapped the accent red from Ferrari to Porsche Carmine because the bright one was shouting, and the grey on "Archive" is now Porsche Chalk that warms up when you hover it. Yes, I color-picked my website off a car configurator. No regrets.
+
+---
+
 ##  How I actually built this
 
 I actually have no experience at all in web development, so ... I basically used the AI as a sounding board (translate: I had the vision in my head, and I'd feed it to the AI and get it to tell me how to actually pull the details off) to figure out the technical stuff on the fly:
@@ -164,6 +187,13 @@ Day 5:
 * is a snake a still life?? (no. it is alive. I thought about this way too hard)
 * if I shot the cars for the event's sponsor, does that make them "event" or "commercial"?
 * why is my best shot the one I took with zero effort in a mall, and none of my actual planned shoots come close?
+
+Day 6:
+* why does my site look horrible on my MacBook but fine on the 27 inch? (turns out pixels have physical sizes and my two screens disagree by 40%)
+* what is `md:` in all these class names actually doing?
+* why did every image URL die at once?? (it didn't. my own laptop's Tailscale was off. the site was fine for literally everyone else)
+* is my wording making it look like I shoot six-figure campaigns when I have exactly one commercial client?
+* am I a bit of a cocky person who happens to be very specific about their taste?
 
 ### Takeaway:
 Instead of wasting nights typing out a hundred individual code brackets by hand, I used the AI like my personal code monkey (and assistant). As in, I handled the system architecture, network tunnels, and visual art direction, and let the AI do the heavy lifting on the syntax and overall coding while also asked it whatever I don't know or not sure. Built the entire pipeline during a single-week sprint in mid-May.
