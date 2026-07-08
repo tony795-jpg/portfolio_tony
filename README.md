@@ -1,5 +1,7 @@
 # Portfolio build log: How I built a decentralized photo site *(and accidentally became a full-stack developer)*
 
+**Live site: [tonynguyen795-portfolio.netlify.app](https://tonynguyen795-portfolio.netlify.app/)**
+
 How I skipped expensive web builders, ran into a wall of code (bugs), and ended up building a custom multi-server system to host my photography lookbooks for $0 (with absolutely no former web dev experience or formal training/education at all)
 
 ---
