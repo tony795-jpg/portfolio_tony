@@ -27,17 +27,18 @@
 
     <style>
         :root {
-            --bg: #070707;
-            --fg: #f5f5f5;
-            --muted: #888888;
-            /* Accent red. Was Ferrari Rosso Corsa #d40000 (too bright);
-               now Porsche Carmine Red territory. Change it HERE, once. */
-            --accent: #a51422;
+            /* paint-to-sample */
+            --tiefschwarz: #070707;   /* Jet Black Metallic */
+            --carraraweiss: #f5f5f5;  /* Carrara White */
+            --achatgrau: #888888;     /* Agate Grey */
+            --kreide: #d8d5cc;        /* Chalk */
+            --karminrot: #a51422;     /* Carmine Red. Was Ferrari Rosso Corsa
+                                         #d40000 (too bright). Change it HERE, once. */
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--fg);
+            background-color: var(--tiefschwarz);
+            color: var(--carraraweiss);
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
@@ -46,15 +47,15 @@
         .display-font { font-family: 'Bricolage Grotesque', sans-serif; }
 
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-track { background: var(--tiefschwarz); }
         ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--karminrot); }
 
         /* Fine grain noise overlay */
         .noise {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             opacity: 0.025; z-index: 9999; pointer-events: none;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         .grid-img-container { position: relative; overflow: hidden; background: #0d0d0d; }
@@ -76,9 +77,9 @@
 
         <header class="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-900 pb-8">
             <div>
-                <div class="text-xs uppercase tracking-[0.4em] text-[color:var(--accent)] font-semibold mb-2">Visual Exhibition</div>
+                <div class="text-xs uppercase tracking-[0.4em] text-[color:var(--karminrot)] font-semibold mb-2">Visual Exhibition</div>
                 <h1 class="display-font text-4xl md:text-6xl font-normal transition-all duration-300 hover:tracking-wide">
-                    TONY NGUYEN <span class="editorial-font italic text-[#c5c2b9] hover:text-[#d8d5cc] transition-colors duration-300 font-normal">Archive</span>
+                    TONY NGUYEN <span class="editorial-font italic text-[#c5c2b9] hover:text-[color:var(--kreide)] transition-colors duration-300 font-normal">Archive</span>
                 </h1>
                 <p class="text-xs uppercase tracking-[0.25em] text-zinc-500 mt-3">Portrait · Events · Automotive · Still Life · Nature</p>
             </div>
@@ -104,21 +105,21 @@
 
         <div id="lightbox" class="lightbox-overlay fixed inset-0 z-[10000] bg-[#060606f2] backdrop-blur-md flex items-center justify-center p-3">
             <div id="lightbox-counter" class="absolute top-4 left-5 text-[10px] 2xl:text-xs tracking-[0.2em] text-zinc-400 tabular-nums pointer-events-none"></div>
-            <button onclick="closeLightbox()" class="absolute top-3 right-4 z-10 text-zinc-400 hover:text-[color:var(--accent)] text-[10px] 2xl:text-xs uppercase tracking-[0.2em] p-2 transition duration-300">
+            <button onclick="closeLightbox()" class="absolute top-3 right-4 z-10 text-zinc-400 hover:text-[color:var(--karminrot)] text-[10px] 2xl:text-xs uppercase tracking-[0.2em] p-2 transition duration-300">
                 <i class="fa-solid fa-xmark mr-1"></i> Close [ESC]
             </button>
 
-            <button onclick="stepLightbox(-1)" aria-label="Previous photo" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 text-zinc-500 hover:text-[color:var(--accent)] text-xl p-3 transition duration-300">
+            <button onclick="stepLightbox(-1)" aria-label="Previous photo" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 text-zinc-500 hover:text-[color:var(--karminrot)] text-xl p-3 transition duration-300">
                 <i class="fa-solid fa-chevron-left"></i>
             </button>
-            <button onclick="stepLightbox(1)" aria-label="Next photo" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 text-zinc-500 hover:text-[color:var(--accent)] text-xl p-3 transition duration-300">
+            <button onclick="stepLightbox(1)" aria-label="Next photo" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 text-zinc-500 hover:text-[color:var(--karminrot)] text-xl p-3 transition duration-300">
                 <i class="fa-solid fa-chevron-right"></i>
             </button>
 
             <img id="lightbox-img" src="" alt="" class="max-h-[85vh] max-w-[85vw] object-contain border border-zinc-900 shadow-2xl">
 
             <h2 id="lightbox-title" class="hidden"></h2>
-            <p id="lightbox-client" class="absolute bottom-4 left-5 text-[10px] 2xl:text-xs tracking-[0.2em] text-[color:var(--accent)] uppercase pointer-events-none"></p>
+            <p id="lightbox-client" class="absolute bottom-4 left-5 text-[10px] 2xl:text-xs tracking-[0.2em] text-[color:var(--karminrot)] uppercase pointer-events-none"></p>
             <span id="lightbox-tag" class="absolute bottom-4 right-4 text-[10px] 2xl:text-xs tracking-[0.2em] border border-zinc-800 bg-zinc-950/70 px-2 py-0.5 text-zinc-400 uppercase pointer-events-none"></span>
         </div>
 
@@ -128,7 +129,7 @@
             </div>
             <div>
                 CONTACT VIA
-                <a href="mailto:duyng8@gmail.com" class="text-zinc-400 hover:text-[color:var(--accent)] underline decoration-dashed underline-offset-4 transition duration-300">DUYNG8@GMAIL.COM</a>
+                <a href="mailto:duyng8@gmail.com" class="text-zinc-400 hover:text-[color:var(--karminrot)] underline decoration-dashed underline-offset-4 transition duration-300">DUYNG8@GMAIL.COM</a>
             </div>
         </footer>
     </div>
