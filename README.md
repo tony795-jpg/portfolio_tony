@@ -113,9 +113,9 @@ Somewhere in here it stopped being a coding project and became a photo-editing o
 
 ### The humbling bit
 
-My single best photo in the whole archive is a **concert shot I took in a random mall in 2023**, on a cheap 50mm, with basically zero intention. It beats every carefully-styled portrait I've ever set up. That stung, until it clicked: photography rewards the caught moment, not the plan. So I put it dead first and let the accident lead.
+My single best photo in the whole archive is a **concert shot I took in a random mall in 2023**, on a cheap 50mm, with basically zero intention. It beats every carefully-styled portrait I've ever set up in an objective way (although most of the portrait shot in here come very close). That stung, until it clicked: photography rewards the caught moment, not the plan. So I put it dead first and let the accident lead.
 
-Which handed me the actual lesson of these two days: my work splits into stuff I **authored** and stuff I just **recorded**. And there are two ways to author: *catch* a moment (the concert) or *build* a frame (the staged car shots, which I set up myself and are good *because* I did). Both are alive. The stuff I only recorded (corporate keynote, event crowd) is flat, because my eye had no say. I'm keeping the flat event shots anyway, not because I love them, but because I need to signal "yes, I can also cover your event for money." Heroes up front, the for-hire proof toward the back.
+Which handed me the actual lesson of these two days: my work splits into stuff I **authored** and stuff I just **recorded**. And there are two ways to author: *catch* a moment (the concert) or *build* a frame (the staged car shots, which I set up myself and are good *because* I did). Both are alive. The stuff I only recorded (corporate keynote, event crowd) is flat, because my eye had no say. I'm keeping the flat event shots anyway, not because I love them, but because I need to signal "yes, I can also cover your event for money, please hire me I beg you, etc." Heroes up front, the for-hire proof toward the back.
 
 ---
 
@@ -128,7 +128,7 @@ v1.0 was live, so naturally I spent a whole day changing everything about it any
 * **Arrow-key / swipe navigation in the full-screen view.** Before this, you had to close a photo and click the next one like a caveman. Now arrows, on-screen chevrons and swiping all work, it only cycles within the filter you picked, and it quietly preloads the neighbors so stepping feels instant. There's also a little "3 / 17" counter now so you know where you are.
 * **Link previews.** Sharing the site used to unfurl as a blank grey nothing in WhatsApp. Added the Open Graph tags so it now shows the concert shot and my name like a real website.
 * **The funnel now survives reboots.** Wrote a tiny systemd service on the Linux box that re-runs the Tailscale Funnel on every boot. Before this, one power blip would have silently killed every image on the live site until I noticed.
-* **Sharp previews on phones.** The grid was serving one 800px thumbnail to everybody, which looks like soup on a modern phone screen. Now the page offers three sizes and every device picks the smallest one that still looks sharp. The medium files I thought were useless leftovers turned out to be exactly what was needed. Nothing gets slower; phones just stop getting the blurry one.
+* **Sharp previews on phones.** The grid was serving one 800px thumbnail to everybody, which looks like 1980s commercials on a modern phone screen. Now the page offers three sizes and every device picks the smallest one that still looks sharp. The medium files I thought were useless leftovers turned out to be exactly what was needed. Nothing gets slower; phones just stop getting the blurry one.
 
 ### The fake outage
 
@@ -137,8 +137,9 @@ Mid-session, every image URL suddenly timed out and I thought the server died. S
 ### The identity crisis
 
 Asked the hard question out loud: is my site dressing itself up like a six-figure studio when the evidence is one commercial client? Answer: kind of, yeah. The design (matte black, no captions) earns itself, but the WORDS were cosplaying as a museum. So: "Commercial Assets & Editorial Documentation" became a plain list of what I actually shoot, the fake museum label in the viewer became the photo counter, and the copy generally stopped writing checks the archive can't cash. Confidence in the design, modesty in the words, proof in the client credits.
+tldr: the photos are fine but the wording is making me sound like I shot 6 figures shoots for Vogue and stuff like that, so I tone it down a bit so clients dont get suspicious and I feel slightly better about myself. 
 
-Then the fonts. My name was set in the same font every tech dashboard on earth uses, which finally started bothering me. Test-drove four typefaces like rental cars (too corporate, too faint, too thick and too small) before landing on Bricolage Grotesque for the name with a Cormorant italic "Archive" next to it. Also swapped the accent red from Ferrari to Porsche Carmine because the bright one was shouting, and the grey on "Archive" is now Porsche Chalk that warms up when you hover it. Yes, I color-picked my website off a car configurator. No regrets.
+Then the fonts. My name was set in the same font every tech dashboard on earth uses, which finally started bothering me. Test fitting four typefaces like clothes (too corporate, too faint, too thick and too small) before landing on Bricolage Grotesque for the name with a Cormorant italic "Archive" next to it (looks quite nice?). Also swapped the accent red from Ferrari to Porsche Carmine because the bright one was shouting, and the grey on "Archive" is now Porsche Chalk that warms up when you hover it. Yes, I color-picked my website off a car configurator. No regrets. I like Porsche 911s better anyway.
 
 ---
 
@@ -156,7 +157,7 @@ The Vercel issue: Opened the Vercel dashboard and saw a flashing "No Domains" wa
 
 The command palette thingy: Realized VS Code wasn't finding the Git tools because the search bar was missing the > command symbol. Caught the missing character myself, forced the editor to run the clone command, and finally yanked the code down from GitHub.
 
-### A bunch of random questions I asked Gemini (updated regularly) (some very funny, others are not)
+### A bunch of random questions I asked (updated regularly) (some very funny, others are not)
 
 Night 2:
 * why is my whole HTML page broken?? (turned out a copy-paste error turned `class=""` into `ass=""`, quite funny I think)
